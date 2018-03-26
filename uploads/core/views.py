@@ -30,7 +30,7 @@ def model_form_upload(request):
             form.save()
             return redirect('home')
 
-    else if request.method == 'GET': # If the form is submitted
+    else:# if request.method == 'GET': # If the form is submitted
 
         search_query = request.GET.get('search_box', None)
 	form = DocumentForm()
