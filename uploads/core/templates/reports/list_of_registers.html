@@ -1,0 +1,164 @@
+{% extends 'base_register.html' %}
+{% load i18n %} {% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}
+    <title>Register Index</title>
+  {% endblock %}
+  {% block extrajs %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('.back').hide();
+});
+</script>
+  {% endblock %}
+</head>
+<body>
+  {% block content %}
+  <div class = 'list-registers'>
+    <div class='view-list'>
+        <table border="1px">
+           <tr>
+              <th>Title</th>
+              <th>Options</th>
+              {% for value in list_of_registers %}
+              <tr>
+               <td>{{value.title}}</td>
+               <td>
+               <a href = '{% url 'view_register' %}?{{value.selected_fields}}'>
+               View Register</a></td>
+           </tr>
+           {% endfor %}
+           <tr>
+           <td>Daily Report
+           </td>
+           <td>
+             <a href =
+              '{% url "daily_report_result"%}'>
+              Daily Report Register
+              </a>
+           </td>
+           </tr>
+           <tr>
+           <td>Consultanct Share
+           </td>
+           <td>
+             <a href =
+              '{% url "consultancy_funds_report"%}'>
+              Consultanct Share
+              </a>
+           </td>
+           </tr>
+           <tr><td>TDS Register</td>
+           <td><a href =
+              '{% url "tds_report_result"%}'>
+              TDS Register
+           </a></td>
+           </tr>
+           <tr><td>Payment Register</td>
+           <td><a href =
+              '{% url "payment_register"%}'>
+              Payment Register
+           </a></td>
+           </tr>
+           <tr>
+          <td>Suspense Register</td>
+           <td><a href =
+              '{% url "suspense_register"%}'>
+              Suspense Register
+           </a></td>
+           </tr>
+           <tr><td>Suspense Clearance Register</td>
+           <td><a href =
+              '{% url "suspense_clearance_register"%}'>
+              Suspense Clearance Register
+           </a></td>
+           </tr>
+           <tr>
+          <td>Suspense Pending Voucher Register</td>
+           <td><a href =
+              '{% url "pending_clearance_register"%}'>
+              Suspense Pending Voucher Register
+           </a></td>
+           </tr>
+           <tr><td>Service Tax Statement</td>
+           <td><a href =
+              '{% url "servicetax_register"%}'>
+              Service Tax Statement
+           </a></td>
+           </tr>
+           <tr><td>Main Register</td>
+           <td><a href =
+              '{% url "main_register"%}'>
+              Main Register
+           </a></td>
+           </tr>
+           <tr><td>Proforma Bill Register</td>
+           <td><a href =
+              '{% url "proforma_register"%}'>
+              Proforma Bill Register
+           </a></td>
+           </tr>
+           <tr><td>Non-Payment Register</td>
+           <td><a href =
+              '{% url "non_payment_register"%}'>
+              Non-payment Register
+           </a></td>
+           </tr>
+          <tr>
+          <td>Client Register</td>
+           <td><a href =
+              '{% url "client_register"%}'>
+              Client Register
+           </a></td>
+           </tr>
+           <tr>
+          <td>Material Report</td>
+           <td><a href =
+              '{% url "material_report"%}'>
+              Material Report
+           </a></td>
+           </tr>
+           <tr>
+          <td>Lab Report</td>
+           <td><a href =
+              '{% url "lab_report"%}'>
+              Lab Report
+           </a></td>
+           </tr>
+           <tr>
+          <td>Registered Users</td>
+           <td><a href =
+              '{% url "registered_users"%}'>
+              Registered Users
+           </a></td>
+           </tr>
+           <tr>
+          <td>TADA Register</td>
+           <td><a href =
+              '{% url "tada_register"%}'>
+              TADA Register
+           </a></td>
+           </tr>
+           <tr>
+          <td>TADA and Other Charges Register</td>
+           <td><a href =
+              '{% url "tada_othercharges_register"%}'>
+              TADA and Other Charges Register
+           </a></td>
+           </tr>
+           <tr>
+           <td>Client Register According to Amount</td>
+           <td><a href =
+              '{% url "client_details_according_to_amount"%}'>
+              Client Register According to Amount
+           </a></td>
+           </tr>
+       </table>
+   </div>
+</div>
+{% endblock %}
+</body>
+</html>

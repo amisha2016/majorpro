@@ -1,0 +1,103 @@
+{% extends 'base_register.html' %}
+{% load i18n %} {% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% block title %}
+    <title>Service Tax Report</title>
+{% endblock %}
+</head>
+<body>
+  {% block content %}
+  <div class = 'list-registers'>
+    <div id='toggle-option'>
+            <a id = 'toggle_button'>
+                <input type="button" class="btn btn-info btn-large" 
+                name="" value="Show Printable Version"></a>
+            </div>
+    <h2><center>Tax Statement</center></h2>
+    <div class='daily-report-list'>
+        <center>Detailed list of 
+        {% for val in taxes_name %}
+        {% if forloop.last %}
+        {{val.surcharge_name}} @ {{val.surcharge_value}} %
+        {% else %}
+        {{val.surcharge_name}} @ {{val.surcharge_value}} %,
+        {% endif %}
+        {% endfor %}
+         for the month of {{month}}, {{year}}</center>
+        <table border="1px">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Receipt No.</th>
+                    <th>Dated</th>
+                    <th>Name of Parties</th>
+		    <th>GST IN</th>
+                    <th>Amount</th>
+                    {% for val in taxes_name %}
+                    <th>{{val.surcharge_name}}</th>
+                    {% endfor %}
+                    <th>Total</th>
+		    <th>Phone no.</th>
+                </tr>
+                {% for value in result %}
+                <tr>
+                    <td>{{ forloop.counter}}</td>
+                    <td>{{ value.0 }}</td>
+                    <td>{{ value.1 }}</td>
+                    <td>{{ value.2 }}</td>
+		    <td>{{value.3}}</td>
+                    <td align= 'right'>{{ value.4 }}</td>
+                    {% for val in value.5 %}
+                    <td align= 'right'>{{ val }}</td>
+                    {% endfor %}
+                    <td align= 'right'>{{ value.6 }}</td>
+                    <td>{{value.7}}</td>
+		</tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="5"><b><center>SUM</center></b></td>
+                    <td align= 'right'>{{total}}</td>
+                    {% for key, value in init_taxes.items %}
+                    <td align= 'right'>{{value}}</td>
+                    {% endfor %}
+                    <td align= 'right'>{{totalplustax}}</td>
+		    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="6"></td>
+                    <td colspan="{{taxes_name|length}}" align="center"><b>{{total_taxes}}</b></td>
+                </tr>
+       </table>
+   </div>
+   <div class='daily-report-list'>
+        <table border="1px">
+          <tr>
+            <td colspan="4"><center>Taxes</center></td>
+            {% for val in taxes_name %}
+            <th><center>{{val.surcharge_name}}</center></th>
+            {% endfor %}
+          </tr>
+            <tr>
+                <td colspan="4"><center>Service Tax Already Paid</center></td>
+                {% for key, value in paid_taxes.items %}
+                <td align= 'right'>{{value}}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                {% for key, value in not_paid_taxes.items %}
+                <td align= 'right'>{{value}}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td colspan="4"><center><b>Total Amount</b></center></td>
+                <td colspan="4" align= 'center'><b>{{total_taxes_not_paid}}</b></td>
+            </tr>
+        </table>
+    </div>
+</div>
+ {% endblock %}
+</body>
+</html>
